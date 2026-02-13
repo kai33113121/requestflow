@@ -1,3 +1,6 @@
-2026/02/07-11:53:25.513 944 Reusing MANIFEST C:\Users\angel\Downloads\bot\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
-2026/02/07-11:53:25.578 944 Recovering log #3
-2026/02/07-11:53:25.623 944 Reusing old log C:\Users\angel\Downloads\bot\.wwebjs_auth\session\Default\Local Storage\leveldb/000003.log 
+2026/02/12-09:48:37.457 4020 Reusing MANIFEST C:\Users\angel\Downloads\bot\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
+2026/02/12-09:48:37.537 4020 Recovering log #3
+2026/02/12-09:48:37.552 4020 Reusing old log C:\Users\angel\Downloads\bot\.wwebjs_auth\session\Default\Local Storage\leveldb/000003.log 
+2026/02/12-09:51:38.500 40e4 Level-0 table #5: started
+2026/02/12-09:51:38.513 40e4 Level-0 table #5: 19247 bytes OK
+2026/02/12-09:51:38.517 40e4 Delete type=0 #3
