@@ -5,8 +5,8 @@ async function main() {
     const connection = await mysql.createConnection({
       host: '172.17.9.87',
       user: 'learn_angelvanegas',
-      password: '00',
-      database: 'crm2',
+      password: 'NsIDEFULAsWa',
+      database: 'miosv2_crm2',
       port: 3306
     });
 

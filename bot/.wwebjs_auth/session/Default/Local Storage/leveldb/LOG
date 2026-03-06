@@ -1,9 +1,0 @@
-2026/02/12-12:24:47.222 2980 Reusing MANIFEST C:\Users\angel\Downloads\bot\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
-2026/02/12-12:24:47.234 2980 Recovering log #4
-2026/02/12-12:24:47.242 2980 Reusing old log C:\Users\angel\Downloads\bot\.wwebjs_auth\session\Default\Local Storage\leveldb/000004.log 
-2026/02/12-14:45:02.561 3d7c Level-0 table #8: started
-2026/02/12-14:45:02.578 3d7c Level-0 table #8: 13865 bytes OK
-2026/02/12-14:45:02.588 3d7c Delete type=0 #4
-2026/02/12-20:04:12.482 3d7c Level-0 table #10: started
-2026/02/12-20:04:12.503 3d7c Level-0 table #10: 13021 bytes OK
-2026/02/12-20:04:12.509 3d7c Delete type=0 #7

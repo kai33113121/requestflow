@@ -1,0 +1,145 @@
+const mysql = require('mysql2/promise');
+
+const db = mysql.createPool({
+    host: '172.17.9.87',
+    user: 'learn_angelvanegas',
+    password: 'NsIDEFULAsWa',
+    database: 'miosv2_crm2',
+    waitForConnections: true,
+    connectionLimit: 5,
+    queueLimit: 0
+});
+
+async function obtenerSolicitudesNuevas(ultimoID) {
+
+    const [rows] = await db.query(`
+        SELECT id, structure_answer
+        FROM form_answers
+        WHERE form_id = 362
+        AND id > ?
+        ORDER BY id ASC
+    `, [ultimoID]);
+
+    return rows.map(row => {
+
+        const structure = JSON.parse(row.structure_answer);
+
+        let tipo = '';
+        let subtipo = '';
+        let campana = '';
+
+        let solicitante = '';
+        let correo = '';
+        let telefono = '';
+
+        structure.forEach(section => {
+
+            if (!section.fields) return;
+
+            section.fields.forEach(campo => {
+
+                const key = campo.key?.toLowerCase() || '';
+
+                // =========================
+                // CAMPAÑA
+                // =========================
+                if (campo.key === 'campana18') {
+
+                    const opcion = campo.dependencies?.[0]?.options?.find(
+                        opt => opt.id == campo.value
+                    );
+
+                    if (opcion) campana = opcion.name;
+                }
+
+                // =========================
+                // TIPO
+                // =========================
+                if (campo.key === 'tipo-de-solicitud0') {
+
+                    const opcion = campo.options?.find(
+                        opt => opt.id == campo.value
+                    );
+
+                    if (opcion) tipo = opcion.name;
+                }
+
+                // =========================
+                // SUBTIPO
+                // =========================
+                if (campo.key === 'subtipo-de-solicitud') {
+
+                    const opcion = campo.options?.find(
+                        opt => opt.id == campo.value
+                    );
+
+                    if (opcion) subtipo = opcion.name;
+                }
+
+                // =========================
+                // SOLICITANTE (busca nombre dinámicamente)
+                // =========================
+                if (!solicitante && (
+                    key.includes('nombre') ||
+                    key.includes('solicitante') ||
+                    key.includes('full')
+                )) {
+                    solicitante = campo.value;
+                }
+
+                // =========================
+                // CORREO
+                // =========================
+                if (!correo && (
+                    key.includes('correo') ||
+                    key.includes('email')
+                )) {
+                    correo = campo.value;
+                }
+
+                // =========================
+                // TELEFONO
+                // =========================
+                if (!telefono && (
+                    key.includes('telefono') ||
+                    key.includes('celular') ||
+                    key.includes('movil')
+                )) {
+                    telefono = campo.value;
+                }
+
+            });
+
+        });
+
+        return {
+            id: row.id,
+            radicado: row.id,
+            campana: campana || 'No especificada',
+            tipo: tipo || 'No especificado',
+            subtipo: subtipo || 'No especificado',
+            solicitante: solicitante || 'No especificado',
+            correo: correo || 'No especificado',
+            telefono: telefono || 'No especificado'
+        };
+
+    });
+}
+
+
+async function obtenerUltimoIDReal() {
+
+    const [rows] = await db.query(`
+        SELECT MAX(id) as ultimo
+        FROM form_answers
+        WHERE form_id = 362
+    `);
+
+    return rows[0].ultimo || 0;
+
+}
+
+module.exports = {
+    obtenerSolicitudesNuevas,
+    obtenerUltimoIDReal
+};
