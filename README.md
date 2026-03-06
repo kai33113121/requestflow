@@ -23,6 +23,4 @@ Este bot consulta la base de datos del CRM periódicamente y envía la informaci
 - Sistema de control de estado para evitar duplicados
 - Reconexión automática del bot si WhatsApp se desconecta
 
----
 
-# Estructura del proyecto
